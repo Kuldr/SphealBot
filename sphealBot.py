@@ -52,6 +52,8 @@ async def on_ready():
     print(clientDiscord.user.name)
     print(clientDiscord.user.id)
     print('------')
+    await clientDiscord.change_presence(game = discord.Game(name = "with my cute friends (:3)\""))
+    print('Set playing status')
 
 #This is where all the on message events happen
 @clientDiscord.event
