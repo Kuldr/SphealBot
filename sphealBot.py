@@ -58,7 +58,7 @@ def getLatestSpheal():
                     return splitAnswer[7]
                 elif x["type"] == "photo":
                     return x["photos"][0]["original_size"]["url"]
-    # TODO: WHAT IF IT DOESN'T FIND A SPHEAL!!!                
+    # TODO: WHAT IF IT DOESN'T FIND A SPHEAL!!!
 
 # When the client is set up and conneted it will print to the system running
 #   the bot that it has connected
