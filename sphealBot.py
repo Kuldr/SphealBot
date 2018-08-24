@@ -84,7 +84,8 @@ async def on_message(message):
                         '- spheal!blog will get you a link to the spheal a day tumblr\n'
                         '- spheal!rnd will get you a random picture of my friends\n'
                         '- spheal!latest will get you a picture of the latest spheal\n'
-                        '- spheal!metalGear will get you a picture of a metal gear spheal\n')
+                        '- spheal!metalGear will get you a picture of a metal gear spheal\n'
+                        '- spheal!support will list the ways you can support the artist\n')
             await clientDiscord.send_message(message.channel, '%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
             blogText = "You can find more of my friends at https://spheal-a-day.tumblr.com (:3)\""
@@ -106,6 +107,12 @@ async def on_message(message):
             else:
                 snakeText += "https://78.media.tumblr.com/525bc24ca1f1c21f0684340988c55b2d/tumblr_inline_oup0067dFI1sarpkj_1280.jpg"
             await clientDiscord.send_message(message.channel, '%s' % snakeText)
+        elif message.content.upper().startswith('SPHEAL!SUPPORT') or message.content.upper().startswith('SPHEAL?SUPPORT'):
+            helpText = ('Thanks for offering support (:3)\"\n'
+                        'You can support the artist on\n\n'
+                        'Ko-fi: https://ko-fi.com/spheal\n'
+                        'Patreon: https://www.patreon.com/dailyspheal')
+            await clientDiscord.send_message(message.channel, '%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!') or message.content.upper().startswith('SPHEAL?'):
             await clientDiscord.send_message(message.channel, 'I\'m sorry I don\'t understand (:3)\"\nYou can use spheal!help to see what I can do')
 
