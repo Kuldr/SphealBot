@@ -44,6 +44,21 @@ def getAllSphealImagesURL():
             offset += POST_LIMIT
     return sphealArray
 
+def getLatestSpheal():
+    print("Finding the latest shpeal")
+    tmpSphealDict = clientTumblr.posts("spheal-a-day", limit = POST_LIMIT)
+
+    # Extract the URLs of the images from the posts
+    #   NB: THIS IS HIGHLY CUSTOM TO THIS BLOG
+    for x in tmpSphealDict["posts"]:
+        if x["type"] == "answer":
+            splitAnswer = x["answer"].split("\"")
+            if len(splitAnswer) >= 8:
+                if not (splitAnswer[7] == "tumblr_blog"):
+                    return splitAnswer[7]
+                elif x["type"] == "photo":
+                    return x["photos"][0]["original_size"]["url"]
+
 # When the client is set up and conneted it will print to the system running
 #   the bot that it has connected
 @clientDiscord.event
@@ -81,8 +96,8 @@ async def on_message(message):
             await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
         elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST'):
             tmp = await clientDiscord.send_message(message.channel, 'Finding you the latest spheal (:3)\"')
-            sphealURLArray = getAllSphealImagesURL()
-            await clientDiscord.edit_message(tmp, "Here is my newest friend (:3)\"\n%s" % sphealURLArray[0])
+            sphealLatest = getLatestSpheal()
+            await clientDiscord.edit_message(tmp, "Here is my newest friend (:3)\"\n%s" % sphealLatest)
         elif message.content.upper().startswith('SPHEAL!METALGEAR') or message.content.upper().startswith('SPHEAL?METALGEAR'):
             snakeText = "Spheal? Spheal!? SPHEAAAAAAAAAAAL!\n"
             if random.randint(0, 1) == 1:
