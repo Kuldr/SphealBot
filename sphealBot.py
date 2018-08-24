@@ -62,17 +62,29 @@ async def on_message(message):
     if clientDiscord.user.id != message.author.id:
         # If the bot is being issued a command checks to see if its in the correct channel
         #   This will hopefully avoid spam
-        if message.content.upper().startswith('SPHEAL!RND') or message.content.upper().startswith('SPHEAL?RND'):
+        if message.content.upper().startswith('SPHEAL!HELP') or message.content.upper().startswith('SPHEAL?HELP'):
+            helpText = ('Hiya (:3)\"\n'
+                        'Here are all the cool things I can do:\n\n'
+                        '- spheal!blog will get you a link to the spheal a day tumblr\n'
+                        '- spheal!rnd will get you a random picture of my friends\n'
+                        '- spheal!metalGear will get you a picture of a metal gear spheal\n')
+            await clientDiscord.send_message(message.channel, '%s' % helpText)
+        elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
+            blogText = "You can find more of my friends at https://spheal-a-day.tumblr.com (:3)\""
+            await clientDiscord.send_message(message.channel, '%s' % blogText)
+        elif message.content.upper().startswith('SPHEAL!RND') or message.content.upper().startswith('SPHEAL?RND'):
             tmp = await clientDiscord.send_message(message.channel, 'Finding you a random spheal (:3)\"')
             sphealURLArray = getAllSphealImagesURL()
             await clientDiscord.edit_message(tmp, "I found all my friends, picking the cutest one for you (:3)\"")
             rndURL = random.choice(sphealURLArray)
             await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
-        elif message.content.upper().startswith('SPHEAL!HELP') or message.content.upper().startswith('SPHEAL?HELP'):
-            helpText = ('Hiya (:3)\"\n'
-                        'Here are all the cool things I can do:\n\n'
-                        '- spheal!rnd will get you a random picture of my friends\n')
-            await clientDiscord.send_message(message.channel, '%s' % helpText)
+        elif message.content.upper().startswith('SPHEAL!METALGEAR') or message.content.upper().startswith('SPHEAL?METALGEAR'):
+            snakeText = "Spheal? Spheal!? SPHEAAAAAAAAAAAL!\n"
+            if random.randint(0, 1) == 1:
+                snakeText += "https://78.media.tumblr.com/452988b3dbc9bac19b450d7eedeb119a/tumblr_inline_p8qkuyrRYX1sarpkj_1280.jpg"
+            else:
+                snakeText += "https://78.media.tumblr.com/525bc24ca1f1c21f0684340988c55b2d/tumblr_inline_oup0067dFI1sarpkj_1280.jpg"
+            await clientDiscord.send_message(message.channel, '%s' % snakeText)
         elif message.content.upper().startswith('SPHEAL!') or message.content.upper().startswith('SPHEAL?'):
             await clientDiscord.send_message(message.channel, 'I\'m sorry I don\'t understand (:3)\"\nYou can use spheal!help to see what I can do')
 
