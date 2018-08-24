@@ -1,10 +1,12 @@
 import pytumblr
+import discord
 import random
 from login import TOKEN, TUMBLR
 
 POST_LIMIT = 50
 
 clientTumblr = TUMBLR # Sets tokens for Tumblr stored in login
+clientDiscord = discord.Client()
 
 clientTumblr.info() # Grabs the current user information
 
@@ -41,7 +43,19 @@ def getAllSphealImagesURL():
             offset += POST_LIMIT
     return sphealArray
 
-# Print the entire array for testing
-sphealURLArray = getAllSphealImagesURL()
-print(sphealURLArray)
-print(random.choice(sphealURLArray))
+# When the client is set up and conneted it will print to the system running
+#   the bot that it has connected
+@clientDiscord.event
+async def on_ready():
+    print('Logged in as')
+    print(clientDiscord.user.name)
+    print(clientDiscord.user.id)
+    print('------')
+
+# Run the bot with the token provided
+clientDiscord.run(TOKEN)
+
+# # Print the entire array for testing
+# sphealURLArray = getAllSphealImagesURL()
+# print(sphealURLArray)
+# print(random.choice(sphealURLArray))
