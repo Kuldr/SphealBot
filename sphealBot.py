@@ -52,6 +52,20 @@ async def on_ready():
     print(clientDiscord.user.id)
     print('------')
 
+#This is where all the on message events happen
+@clientDiscord.event
+async def on_message(message):
+    # Makes sure the bot can't respond to itself
+    if clientDiscord.user.id != message.author.id:
+        # If the bot is being issued a command checks to see if its in the correct channel
+        #   This will hopefully avoid spam
+        if message.content.upper().startswith('!RNDSPHEAL') or message.content.upper().startswith('?RNDSPHEAL'):
+            tmp = await clientDiscord.send_message(message.channel, 'Finding you a random spheal (:3)\"')
+            # Do stuff here
+
+        else:
+            await clientDiscord.send_message(message.channel, 'Command not recognised')
+
 # Run the bot with the token provided
 clientDiscord.run(TOKEN)
 
