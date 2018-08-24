@@ -4,14 +4,14 @@ from login import TOKEN, TUMBLR
 
 POST_LIMIT = 50
 
-client = TUMBLR # Sets tokens for Tumblr stored in login
+clientTumblr = TUMBLR # Sets tokens for Tumblr stored in login
 
-client.info() # Grabs the current user information
+clientTumblr.info() # Grabs the current user information
 
 def getAllSphealImagesURL():
     offset = 0
     # Finds total number of posts on the blog
-    postsLeft = client.blog_info("spheal-a-day")["blog"]["posts"]
+    postsLeft = clientTumblr.blog_info("spheal-a-day")["blog"]["posts"]
     # Sets an empty array for all the URLS
     sphealArray = []
     # API hard limits to 50 posts at a time :( So this gets all of them :)
@@ -19,11 +19,11 @@ def getAllSphealImagesURL():
             # If there are more posts left than the limit get the limit
             if postsLeft >= POST_LIMIT:
                 print("Getting %d posts" % POST_LIMIT)
-                tmpSphealDict = client.posts("spheal-a-day", offset = offset, limit = POST_LIMIT)
+                tmpSphealDict = clientTumblr.posts("spheal-a-day", offset = offset, limit = POST_LIMIT)
             # Otherwise get the remaining posts
             else:
                 print("Getting %d posts" % postsLeft)
-                tmpSphealDict = client.posts("spheal-a-day", offset = offset, limit = postsLeft)
+                tmpSphealDict = clientTumblr.posts("spheal-a-day", offset = offset, limit = postsLeft)
 
             # Extract the URLs of the images from the posts
             #   NB: THIS IS HIGHLY CUSTOM TO THIS BLOG
