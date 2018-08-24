@@ -81,7 +81,7 @@ async def on_message(message):
         if message.content.upper().startswith('SPHEAL!HELP') or message.content.upper().startswith('SPHEAL?HELP'):
             helpText = ('Hiya (:3)\"\n'
                         'Here are all the cool things I can do:\n\n'
-                        '- spheal!blog will get you a link to the spheal a day tumblr\n'
+                        '- spheal!blog will get you a link to the spheal a day tumblr so you can find more of my friends\n'
                         '- spheal!rnd will get you a random picture of my friends\n'
                         '- spheal!latest will get you a picture of the latest spheal\n'
                         '- spheal!metalGear will get you a picture of a metal gear spheal\n'
