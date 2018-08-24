@@ -37,7 +37,7 @@ def getAllSphealImagesURL():
                         if not (splitAnswer[7] == "tumblr_blog"):
                             sphealArray.append(splitAnswer[7])
                     elif x["type"] == "photo":
-                        sphealArray.append(sphealArray = sphealArray + x["photos"][0]["original_size"]["url"])
+                        sphealArray.append(x["photos"][0]["original_size"]["url"])
 
             # Adjust the counters
             postsLeft -= POST_LIMIT
