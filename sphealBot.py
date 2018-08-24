@@ -64,7 +64,7 @@ async def on_message(message):
             # Do stuff here
 
         else:
-            await clientDiscord.send_message(message.channel, 'Command not recognised')
+            await clientDiscord.send_message(message.channel, 'I\'m sorry I don\'t understand (:3)\"')
 
 # Run the bot with the token provided
 clientDiscord.run(TOKEN)
