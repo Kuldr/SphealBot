@@ -67,6 +67,7 @@ async def on_message(message):
                         'Here are all the cool things I can do:\n\n'
                         '- spheal!blog will get you a link to the spheal a day tumblr\n'
                         '- spheal!rnd will get you a random picture of my friends\n'
+                        '- spheal!latest will get you a picture of the latest spheal\n'
                         '- spheal!metalGear will get you a picture of a metal gear spheal\n')
             await clientDiscord.send_message(message.channel, '%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
@@ -78,6 +79,10 @@ async def on_message(message):
             await clientDiscord.edit_message(tmp, "I found all my friends, picking the cutest one for you (:3)\"")
             rndURL = random.choice(sphealURLArray)
             await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
+        elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST'):
+            tmp = await clientDiscord.send_message(message.channel, 'Finding you the latest spheal (:3)\"')
+            sphealURLArray = getAllSphealImagesURL()
+            await clientDiscord.edit_message(tmp, "Here is my newest friend (:3)\"\n%s" % sphealURLArray[0])
         elif message.content.upper().startswith('SPHEAL!METALGEAR') or message.content.upper().startswith('SPHEAL?METALGEAR'):
             snakeText = "Spheal? Spheal!? SPHEAAAAAAAAAAAL!\n"
             if random.randint(0, 1) == 1:
