@@ -97,13 +97,13 @@ async def on_message(message):
         elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
             blogText = "You can find more of my friends at https://spheal-a-day.tumblr.com (:3)\""
             await clientDiscord.send_message(message.channel, '%s' % blogText)
-        elif message.content.upper().startswith('SPHEAL!RND') or message.content.upper().startswith('SPHEAL?RND'):
+        elif message.content.upper().startswith('SPHEAL!RND') or message.content.upper().startswith('SPHEAL?RND') or message.content.upper().startswith('SPHEAL!RANDOM') or message.content.upper().startswith('SPHEAL?RANDOM'):
             tmp = await clientDiscord.send_message(message.channel, 'Finding you a random spheal (:3)\"')
             sphealURLArray = getAllSphealImagesURL()
             await clientDiscord.edit_message(tmp, "I found all my friends, picking the cutest one for you (:3)\"")
             rndURL = random.choice(sphealURLArray)
             await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
-        elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST'):
+        elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST') or message.content.upper().startswith('SPHEAL!DAILY') or message.content.upper().startswith('SPHEAL?DAILY'):
             tmp = await clientDiscord.send_message(message.channel, 'Finding you the latest spheal (:3)\"')
             sphealLatest = getLatestSpheal()
             await clientDiscord.edit_message(tmp, "Here is my newest friend (:3)\"\n%s" % sphealLatest)
