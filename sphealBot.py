@@ -3,11 +3,20 @@ import discord
 import random
 from login import TOKEN, TUMBLR
 
+#===============================================================================
+# IDEAS
+# GIVE TITLE FOR ANSWERS / PHOTOS
+# MAKE IT POST THE DAILY SPHEAL ON TIME?
+# CAN @SPHEAL_BOT AND IT WILL RESPOND
+# Look into default discord help command
+# Look into regex in python
+# Refactor so that you don't have to add the beginning everytime
+#===============================================================================
+
 POST_LIMIT = 50
 
 clientTumblr = TUMBLR # Sets tokens for Tumblr stored in login
 clientDiscord = discord.Client()
-# Look into default discord help command
 
 clientTumblr.info() # Grabs the current user information
 
@@ -76,8 +85,6 @@ async def on_ready():
 async def on_message(message):
     # Makes sure the bot can't respond to itself
     if clientDiscord.user.id != message.author.id:
-        # If the bot is being issued a command checks to see if its in the correct channel
-        #   This will hopefully avoid spam
         if message.content.upper().startswith('SPHEAL!HELP') or message.content.upper().startswith('SPHEAL?HELP'):
             helpText = ('Hiya (:3)\"\n'
                         'Here are all the cool things I can do:\n\n'
