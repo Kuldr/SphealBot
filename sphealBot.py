@@ -1,7 +1,6 @@
 import pytumblr
 import discord
 import random
-import threading
 from login import TOKEN, TUMBLR
 
 #===============================================================================
@@ -20,14 +19,6 @@ clientTumblr = TUMBLR # Sets tokens for Tumblr stored in login
 clientDiscord = discord.Client()
 
 clientTumblr.info() # Grabs the current user information
-
-def repeat():
-  threading.Timer(5.0, repeat).start()
-  print("Hi")
-  # clientDiscord
-  # 212960804792827904
-
-repeat()
 
 def getAllSphealImagesURL():
     offset = 0
