@@ -111,7 +111,6 @@ async def on_message(message):
             sphealURLArray = getAllSphealImagesURL()
             await clientDiscord.edit_message(tmp, "I found all my friends, picking the cutest one for you (:3)\"")
             rndURL = random.choice(sphealURLArray)
-            print("Random Spheal choosen")
             await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
         elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST') or message.content.upper().startswith('SPHEAL!DAILY') or message.content.upper().startswith('SPHEAL?DAILY'):
             tmp = await clientDiscord.send_message(message.channel, 'Finding you the latest spheal (:3)\"')
