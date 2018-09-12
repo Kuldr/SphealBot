@@ -3,12 +3,12 @@
 import pytumblr
 import discord
 import random
+import asyncio
 from login import TOKEN, TUMBLR
 
 #===============================================================================
 # IDEAS
 # GIVE TITLE FOR ANSWERS / PHOTOS
-# MAKE IT POST THE DAILY SPHEAL ON TIME?
 # CAN @SPHEAL_BOT AND IT WILL RESPOND
 # Look into default discord help command
 # Look into regex in python
@@ -71,6 +71,31 @@ def getLatestSpheal():
                     return x["photos"][0]["original_size"]["url"]
     # TODO: WHAT IF IT DOESN'T FIND A SPHEAL!!!
 
+# Loads the last latest shpeal on start up
+lastLatestURL = getLatestSpheal()
+
+# Checks whether the latest spheal is different to what it last saw
+def isLatestDifferent():
+    latestURL = getLatestSpheal()
+    if lastLatestURL == latestURL:
+        return False
+    else:
+        return True
+
+# Search for a new latest spheal and post if it is new
+async def searchForNewSpheal():
+    await clientDiscord.wait_until_ready()
+    channel = discord.Object(id='423833486151909404')
+    while not clientDiscord.is_closed:
+        if isLatestDifferent():
+            sphealLatest = getLatestSpheal()
+            global lastLatestURL
+            lastLatestURL = sphealLatest
+            await clientDiscord.send_message(channel, "Here is my newest friend (:3)\"\n%s" % sphealLatest)
+        else:
+            print("No new spheal")
+        await asyncio.sleep(1800) # task runs every 60*60 seconds (1 hour)
+
 # When the client is set up and conneted it will print to the system running
 #   the bot that it has connected
 @clientDiscord.event
@@ -125,6 +150,9 @@ async def on_message(message):
             await clientDiscord.send_message(message.channel, '%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!') or message.content.upper().startswith('SPHEAL?'):
             await clientDiscord.send_message(message.channel, 'I\'m sorry I don\'t understand (:3)\"\nYou can use spheal!help to see what I can do')
+
+#Start the background task looking for a new spheal
+clientDiscord.loop.create_task(searchForNewSpheal())
 
 # Run the bot with the token provided
 clientDiscord.run(TOKEN)
