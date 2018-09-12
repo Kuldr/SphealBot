@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import pytumblr
 import discord
 import random
