@@ -113,13 +113,13 @@ async def on_message(message):
     # Makes sure the bot can't respond to itself
     if clientDiscord.user.id != message.author.id:
         if message.content.upper().startswith('SPHEAL!HELP') or message.content.upper().startswith('SPHEAL?HELP'):
-            helpText = ('Hiya (:3)\"\n'
+            helpText = ('\'\'\'Hiya (:3)\"\n'
                         'Here are all the cool things I can do:\n\n'
                         '- spheal!blog will get you a link to the spheal a day tumblr so you can find more of my friends\n'
                         '- spheal!rnd will get you a random picture of my friends\n'
                         '- spheal!latest will get you a picture of the latest spheal\n'
                         '- spheal!metalGear will get you a picture of a metal gear spheal\n'
-                        '- spheal!support will list the ways you can support the artist\n')
+                        '- spheal!support will list the ways you can support the artist\n\'\'\'')
             await clientDiscord.send_message(message.channel, '%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
             blogText = "You can find more of my friends at https://spheal-a-day.tumblr.com (:3)\""
