@@ -89,7 +89,7 @@ async def searchForNewSpheal():
             sphealLatest = getLatestSpheal()
             global lastLatestURL
             lastLatestURL = sphealLatest
-            await clientDiscord.send_message(channel, "Here is my newest friend (:3)\"\n%s" % sphealLatest)
+            await channel.send("Here is my newest friend (:3)\"\n%s" % sphealLatest)
         else:
             print("No new spheal")
         await asyncio.sleep(1800) # task runs every 60*60 seconds (1 hour)
@@ -102,7 +102,7 @@ async def on_ready():
     print(clientDiscord.user.name)
     print(clientDiscord.user.id)
     print('------')
-    await clientDiscord.change_presence(game = discord.Game(name = "with my cute friends (:3)\""))
+    await clientDiscord.change_presence(activity = discord.Game(name = "with my cute friends (:3)\""))
     print('Set playing status')
 
 #This is where all the on message events happen
@@ -121,36 +121,36 @@ async def on_message(message):
                         '- \'metalGear\' will get you a picture of a metal gear spheal\n'
                         '- \'support\' will list the ways you can support the artist```'
                         'For example spheal!random will find a random spheal YAY! (:3)\"')
-            await clientDiscord.send_message(message.channel, '%s' % helpText)
+            await message.channel.send('%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!BLOG') or message.content.upper().startswith('SPHEAL?BLOG'):
             blogText = "You can find more of my friends at https://spheal-a-day.tumblr.com (:3)\""
-            await clientDiscord.send_message(message.channel, '%s' % blogText)
+            await message.channel.send('%s' % blogText)
         elif message.content.upper().startswith('SPHEAL!RND') or message.content.upper().startswith('SPHEAL?RND') or message.content.upper().startswith('SPHEAL!RANDOM') or message.content.upper().startswith('SPHEAL?RANDOM'):
-            tmp = await clientDiscord.send_message(message.channel, 'Finding you a random spheal (:3)\"')
+            tmp = await message.channel.send('Finding you a random spheal (:3)\"')
             sphealURLArray = getAllSphealImagesURL()
-            await clientDiscord.edit_message(tmp, "I found all my friends, picking the cutest one for you (:3)\"")
+            await tmp.edit(content = "I found all my friends, picking the cutest one for you (:3)\"")
             rndURL = random.choice(sphealURLArray)
             print("Random Spheal choosen")
-            await clientDiscord.edit_message(tmp, "%s (:3)\"" % rndURL)
+            await tmp.edit(content = "%s (:3)\"" % rndURL)
         elif message.content.upper().startswith('SPHEAL!LATEST') or message.content.upper().startswith('SPHEAL?LATEST') or message.content.upper().startswith('SPHEAL!DAILY') or message.content.upper().startswith('SPHEAL?DAILY'):
-            tmp = await clientDiscord.send_message(message.channel, 'Finding you the latest spheal (:3)\"')
+            tmp = await message.channel.send('Finding you the latest spheal (:3)\"')
             sphealLatest = getLatestSpheal()
-            await clientDiscord.edit_message(tmp, "Here is my newest friend (:3)\"\n%s" % sphealLatest)
+            await tmp.edit(content = "Here is my newest friend (:3)\"\n%s" % sphealLatest)
         elif message.content.upper().startswith('SPHEAL!METALGEAR') or message.content.upper().startswith('SPHEAL?METALGEAR'):
             snakeText = "Spheal? Spheal!? SPHEAAAAAAAAAAAL!\n"
             if random.randint(0, 1) == 1:
                 snakeText += "https://78.media.tumblr.com/452988b3dbc9bac19b450d7eedeb119a/tumblr_inline_p8qkuyrRYX1sarpkj_1280.jpg"
             else:
                 snakeText += "https://78.media.tumblr.com/525bc24ca1f1c21f0684340988c55b2d/tumblr_inline_oup0067dFI1sarpkj_1280.jpg"
-            await clientDiscord.send_message(message.channel, '%s' % snakeText)
+            await message.channel.send('%s' % snakeText)
         elif message.content.upper().startswith('SPHEAL!SUPPORT') or message.content.upper().startswith('SPHEAL?SUPPORT'):
             helpText = ('Thanks for offering support (:3)\"\n'
                         'You can support the artist on\n\n'
                         'Ko-fi: https://ko-fi.com/spheal\n'
                         'Patreon: https://www.patreon.com/dailyspheal')
-            await clientDiscord.send_message(message.channel, '%s' % helpText)
+            await message.channel.send('%s' % helpText)
         elif message.content.upper().startswith('SPHEAL!') or message.content.upper().startswith('SPHEAL?'):
-            await clientDiscord.send_message(message.channel, 'I\'m sorry I don\'t understand (:3)\"\nYou can use spheal!help to see what I can do')
+            await message.channel.send('I\'m sorry I don\'t understand (:3)\"\nYou can use spheal!help to see what I can do')
 
 #Start the background task looking for a new spheal
 clientDiscord.loop.create_task(searchForNewSpheal())
