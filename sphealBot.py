@@ -83,8 +83,8 @@ def isLatestDifferent():
 # Search for a new latest spheal and post if it is new
 async def searchForNewSpheal():
     await clientDiscord.wait_until_ready()
-    channel = discord.Object(id='423833486151909404')
-    while not clientDiscord.is_closed:
+    channel = clientDiscord.get_channel(423833486151909404)
+    while not clientDiscord.is_closed():
         if isLatestDifferent():
             sphealLatest = getLatestSpheal()
             global lastLatestURL
@@ -92,7 +92,7 @@ async def searchForNewSpheal():
             await channel.send("Here is my newest friend (:3)\"\n%s" % sphealLatest)
         else:
             print("No new spheal")
-        await asyncio.sleep(1800) # task runs every 60*60 seconds (1 hour)
+        await asyncio.sleep(1800) # task runs every 60*60/2 seconds (1/2 hour)
 
 # When the client is set up and conneted it will print to the system running
 #   the bot that it has connected
